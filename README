@@ -1,2 +1,11 @@
 # py-vaccine
 this is my vaccine study.
+
+
+* FILE NAMING RULES
+
+- 수정중인 파일 -> FunctionName_mod.py
+
+- 함수 -> FunctionName.py
+
+- 단원의 마지막 최종본 -> Final.py

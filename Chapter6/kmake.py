@@ -5,50 +5,57 @@ Created on Tue Oct 23 01:48:33 2018
 
 @author: zel0rd
 """
-
 import sys
 import zlib
 import hashlib
 import os
 
-def main() :
-    if len(sys.argv) != 2 :
-        print('Usage : kmake.py [file]')
-        return
+def main():
+    
+    if len(sys.argv) != 2:
+        print('Usage:antivirus.py [file]')
+        exit(0)
     
     fname = sys.argv[1]
     tname = fname
+    #print("tname : %s" % tname)
+
     
     fp = open(tname, 'rb')
     buf = fp.read()
+    #print("buf : %s " % buf)
     fp.close()
     
     buf2 = zlib.compress(buf)
+    #print("buf2 : %s" % buf2)
+
     
     buf3 = ''
-    #print(buf2)
     for c in buf2:
-        #print(c)
-        buf3 += chr(ord(chr(c)) ^ 0xFF) #형변환 확인하기 (error 수정)
+        buf3 += chr(c ^ 0xFF)
         
+    #print("buf3 : %s " % buf3)
+
     buf4 = 'KAVM' + buf3
     
-    print("Print buf4 : " + buf4)
-    #f = buf4.decode('utf-8')
+    f = buf4.encode()
+    #print("buf4 : %s" % buf4)
     for i in range(3):
         md5 = hashlib.md5()
         md5.update(f)
-        f = md5.hexdigest()
+        f = md5.hexdigest().encode()
         
-    buf4 += f
+    f += f
+    
     
     kmd_name = fname.split('.')[0] + '.kmd'
     fp = open(kmd_name, 'wb')
-    fp.write(buf4)
+    fp.write(f)
     fp.close()
     
-    print('%s -> %s' % (fname, kmd_name))
+    print("%s ===>>> %s" % (fname,kmd_name))
     
-if __name__ == '__main__' : 
+if __name__ == '__main__':
     main()
+    
     
