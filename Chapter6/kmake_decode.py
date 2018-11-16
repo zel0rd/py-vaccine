@@ -17,7 +17,7 @@ def DecodeKMD(fname):
         buf = fp.read()
         fp.close()
         
-        buf2 = buf[:-32]
+            buf2 = buf[:-32]
         fmd5 = buf[-32:]
         
         f = buf2
